@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import { createVendorinput, createRiderinput } from "../dto";
-import { Vendor, Rider } from "../models";
+import { createVendorinput, createRiderinput } from "../../dto";
+import { Vendor, Rider } from "../../models";
 import { genSalt } from "bcrypt";
-import { GeneratePassword, GenerateSalt } from "../utility";
+import { GeneratePassword, GenerateSalt } from "../../utility";
 
 
 export const getVendors = async (req: Request, res: Response, next: NextFunction) => {
