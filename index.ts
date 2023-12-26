@@ -6,6 +6,7 @@ import { VendorRoute, AdminRoute } from "./routes";
 import { MONGO_URI } from "./config";
 
 import { connectDb } from "./config/dbConnections"
+import { StateRoute } from "./routes/statesAndLgaRoutes";
 const dotenv = require("dotenv").config();
 
 connectDb();
@@ -21,6 +22,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api/admin', AdminRoute);
 app.use('/api/vendors', VendorRoute);
+app.use('/api/', StateRoute);
+
 
 // mongoose.connect(MONGO_URI,{
 //     // useNewurlParser: true;
@@ -35,7 +38,7 @@ app.use('/api/vendors', VendorRoute);
 app.listen(8000, () => {
     console.clear()
     console.log("App is listening to port 8000");
-})  
+})
 
 
 

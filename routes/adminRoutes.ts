@@ -10,7 +10,7 @@ router.get('/vendors', getVendor);
 
 router.get('/vendors/:id', getVendorById);
 
-router.patch('/vendors', updateVendorById);
+router.patch('/vendors/:id', updateVendorById);
 
 router.delete('/vendors/:id', deleteVendorById);
 
@@ -21,7 +21,7 @@ router.get('/riders', getRider);
 
 router.get('/riders/:id', getRiderById);
 
-router.patch('/riders', updateRiderById);
+router.patch('/riders/:id', updateRiderById);
 
 router.delete('/riders/:id', deleteRiderById);
 

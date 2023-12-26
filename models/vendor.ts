@@ -4,7 +4,10 @@ interface vendorDoc extends Document {
     name: string;
     emailAddress: string;
     phoneNumber: string;
+    state: string;
+    lga: string;
     address: string;
+    businessName: string;
     password: string;
     salt: string;
     serviceAvaliable: boolean;
@@ -15,9 +18,12 @@ interface vendorDoc extends Document {
 const VendorShema = new Schema({
     name: { type: String, required: true },
     emailAddress: { type: String, required: true },
+    status: { type: String, required: true },
     phoneNumber: { type: String, required: true },
-    status: { type: String, requireed: true },
+    state: { type: String, required: true },
+    lga: { type: String, required: true },
     address: { type: String, required: true },
+    businessName: { type: String, required: true },
     password: { type: String, required: true },
     salt: { type: String, required: true },
     serviceAvaliable: { type: Boolean, required: true },
