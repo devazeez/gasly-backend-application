@@ -5,7 +5,11 @@ const NaijaStates = require('naija-state-local-government');
 
 export const getStates = async (req: Request, res: Response, next: NextFunction) => {
 
-        const states = NaijaStates.all()
+        // const allowedStates ={
+        //         "lagos": NaijaStates.lgas("lagos"),
+        // }
+
+        const states = NaijaStates.lgas("lagos")
 
         if (states !== null) {
                 return res.status(200).json({

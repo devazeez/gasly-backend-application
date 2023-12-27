@@ -7,8 +7,6 @@ import { GeneratePassword, GenerateSalt, phoneValidaion, emailValidator } from "
 
 
 
-
-
 export const createVendor = async (req: Request, res: Response, next: NextFunction) => {
 
     const { name, emailAddress, phoneNumber, state, lga, address, businessName, password } = <createVendorinput>req.body;
@@ -34,7 +32,7 @@ export const createVendor = async (req: Request, res: Response, next: NextFuncti
         })
     } else if (existingVendorBusinessName !== null) {
         res.status(400).json({
-            "message": "A vendor with business name " + "'" + existingVendorBusinessName + "'" + " already exists"
+            "message": "A vendor with business name " + "'" + businessName + "'" + " already exists"
         })
     }
 
