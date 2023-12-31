@@ -45,12 +45,18 @@ export const getProfile = async (req: Request, res: Response, next: NextFunction
 
         const existingVendor = await findVendor('', '', user.emailAddress, '');
 
-        return res.status(200).json({
-            "message": "Profile fetched successfully",
-            "data": existingVendor
-        })
+        if (existingVendor == null){
+            return res.status(404).json({
+                "message": "Vendor does not exists"
+            })
+        }else{
+            return res.status(200).json({
+                "message": "Profile fetched successfully",
+                "data": existingVendor
+            })
+        }
 
-    } else return res.status(200).json({
+    } else return res.status(404).json({
         "message": 'User not found'
     })
 
@@ -76,8 +82,11 @@ export const updateProfile = async (req: Request, res: Response, next: NextFunct
         const existingVendorPhone = await Vendor.findOne({ phoneNumber: phoneNumber, _id: { $ne: user._id } })
         const existingBusinessName = await Vendor.findOne({ businessName: businessName, _id: { $ne: user._id } })
 
-
-        if (existingVendor) {
+        if (existingVendor == null){
+            return res.status(404).json({
+                "message": "Vendor does not exists"
+            })
+        } else if (existingVendor) {
 
             if (existingVendorPhone !== null) {
                 res.status(400).json({
@@ -87,9 +96,9 @@ export const updateProfile = async (req: Request, res: Response, next: NextFunct
                 res.status(400).json({
                     "message": "A vendor with business name " + "'" + businessName + "'" + " already exists"
                 })
-            }
+            }else{
 
-            existingVendor.name = name,
+                existingVendor.name = name,
                 existingVendor.phoneNumber = phoneNumber,
                 existingVendor.businessName = businessName
 
@@ -99,10 +108,12 @@ export const updateProfile = async (req: Request, res: Response, next: NextFunct
                 "message": "Profile fetched successfully",
                 "data": updatedVendor
             })
+
+            }
+
         }
 
-
-    } else return res.status(200).json({
+    } else return res.status(404).json({
         "message": 'User not found'
     })
 
