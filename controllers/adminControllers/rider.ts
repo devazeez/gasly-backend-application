@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { createVendorinput, createRiderinput, updateVendorinput, updateRiderinput } from "../../dto";
 import { Vendor, Rider } from "../../models";
 import { genSalt } from "bcrypt";
-import { GeneratePassword, GenerateSalt, phoneValidaion, emailValidator } from "../../utility";
+import { GeneratePassword, GenerateSalt, phoneValidaion, emailValidator, passwordComplexity } from "../../utility";
 
 
 // Admin Controller for Riders
@@ -43,17 +43,29 @@ export const createRider = async (req: Request, res: Response, next: NextFunctio
         })
     }
 
-    if (state !== "Lagos" && lga !== "Surulere") {
+    if (state !== "Lagos" || lga !== "Surulere") {
         res.status(400).json({
             "message": "Our services aren't available at your location just yet"
         })
+    }
+
+    const isPasswordComplex = passwordComplexity(password);
+    let validatedPassword = '';
+    
+    if (isPasswordComplex.error) {
+        return res.status(400).json({
+            message: "Invalid password complexity",
+            data: isPasswordComplex.error.details,
+        });
+    } else {
+        validatedPassword = isPasswordComplex.value;
     }
 
 
     // Generates salt
     const salt = await GenerateSalt()
     // Hashes password
-    const hashedPassword = await GeneratePassword(password, salt)
+    const hashedPassword = await GeneratePassword(validatedPassword, salt)
 
 
     // Creates Rider

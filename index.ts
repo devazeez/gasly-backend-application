@@ -19,7 +19,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // app.use("/", (req,res) => {
 //     return res.json("Hello gasly")
 // })
-
 app.use('/api/admin', AdminRoute);
 app.use('/api/vendors', VendorRoute);
 app.use('/api/', StateRoute);

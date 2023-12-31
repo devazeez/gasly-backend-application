@@ -14,6 +14,9 @@ router.patch('/vendors/:id', updateVendorById);
 
 router.delete('/vendors/:id', deleteVendorById);
 
+// router.get('/vendors/stats', vendorStats);
+
+
 
 router.post('/riders', createRider);
 

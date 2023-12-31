@@ -4,6 +4,7 @@ interface vendorDoc extends Document {
     name: string;
     emailAddress: string;
     phoneNumber: string;
+    status: string;
     state: string;
     lga: string;
     address: string;
