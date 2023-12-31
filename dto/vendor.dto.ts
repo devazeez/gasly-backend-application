@@ -3,7 +3,7 @@ export interface createVendorinput {
     emailAddress: string;
     phoneNumber: string;
     state: string;
-    lga:string;
+    lga: string;
     address: string;
     businessName: string;
     password: string;
@@ -15,4 +15,21 @@ export interface updateVendorinput {
     phoneNumber: string;
     address: string;
     businessName: string;
+};
+
+export interface vendorLoginInput {
+    emailAddress: string;
+    password: string;
+};
+
+export interface updateProfileInput {
+    name: string;
+    phoneNumber: string;
+    businessName: string;
+};
+
+export interface vendorPayload {
+    _id: string;
+    emailAddress: string;
+    password: string;
 };

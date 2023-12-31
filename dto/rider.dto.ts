@@ -5,6 +5,7 @@ export interface createRiderinput {
     state: string;
     lga: string;
     address: string;
+    businessName: string;
     password: string;
     imageUrl: string;
 }
@@ -14,5 +15,5 @@ export interface updateRiderinput {
     emailAddress: string;
     phoneNumber: string;
     address: string;
-
+    businessName: string;
 };
