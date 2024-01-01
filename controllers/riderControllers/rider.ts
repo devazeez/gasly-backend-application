@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import { riderLoginInput, updateRiderProfileInput } from "../../dto";
+import { riderLoginInput, updateRiderProfileInput, createRiderinput } from "../../dto";
 import { Rider } from "../../models";
 import { genSalt } from "bcrypt";
-import { GeneratePassword, GenerateSalt, generateToken, validatePassword, phoneValidaion } from "../../utility";
+import { generateToken, validatePassword, phoneValidaion, passwordComplexity, GenerateSalt, GeneratePassword, emailValidator} from '../../utility'
 
 
 
@@ -17,6 +17,91 @@ export const findRider = async (id: string | undefined, emailAddress: string | u
         return await Rider.findOne({ _id: id })
     }
 }
+
+
+
+export const riderSignUp = async (req: Request, res: Response, next: NextFunction) => {
+
+    const { name, emailAddress, phoneNumber, address, password, imageUrl, state, lga } = <createRiderinput>req.body;
+
+
+    const validatedNigerianNumber = phoneValidaion(phoneNumber)
+    const isValidEmail = emailValidator(emailAddress)
+
+    const existingRiderEmail = await Rider.findOne({ emailAddress: emailAddress })
+    const existingRiderName = await Rider.findOne({ name: name })
+    const existingRiderPhone = await Rider.findOne({ phoneNumber: phoneNumber })
+
+    if (validatedNigerianNumber !== true) {
+        res.status(400).json({
+            "message": "The number " + "'" + phoneNumber + "'" + "is not a valid Nigerian number"
+        })
+    } else if (isValidEmail !== true) {
+        res.status(400).json({
+            "message": "The email " + "'" + emailAddress + "'" + "is not a valid email address"
+        })
+    }
+
+    if (existingRiderEmail !== null) {
+        res.status(400).json({
+            "message": "A Rider with email " + "'" + emailAddress + "'" + " already exists"
+        })
+    } else if (existingRiderName !== null) {
+        res.status(400).json({
+            "message": "A Rider with name " + "'" + name + "'" + " already exists"
+        })
+    } else if (existingRiderPhone !== null) {
+        res.status(400).json({
+            "message": "A Rider with phone " + "'" + phoneNumber + "'" + " already exists"
+        })
+    }
+
+    if (state !== "Lagos" || lga !== "Surulere") {
+        res.status(400).json({
+            "message": "Our services aren't available at your location just yet"
+        })
+    }
+
+    const isPasswordComplex = passwordComplexity(password);
+    let validatedPassword = '';
+    
+    if (isPasswordComplex.error) {
+        return res.status(400).json({
+            message: "Invalid password complexity",
+            data: isPasswordComplex.error.details,
+        });
+    } else {
+        validatedPassword = isPasswordComplex.value;
+    }
+
+
+    // Generates salt
+    const salt = await GenerateSalt()
+    // Hashes password
+    const hashedPassword = await GeneratePassword(validatedPassword, salt)
+
+
+    // Creates Rider
+    const createdRider = await Rider.create({
+        name: name,
+        emailAddress: emailAddress,
+        status: "pending",
+        phoneNumber: phoneNumber,
+        lga: lga,
+        state: state,
+        address: address,
+        password: hashedPassword,
+        salt: salt,
+        imageUrl: imageUrl,
+    })
+    return res.status(200).json({
+        "message": "Rider successfully signed up",
+        "data": createdRider
+    })
+}
+
+
+
 
 export const riderLogin = async (req: Request, res: Response, next: NextFunction) => {
 

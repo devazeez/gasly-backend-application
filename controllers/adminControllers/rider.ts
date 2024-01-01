@@ -69,7 +69,7 @@ export const createRider = async (req: Request, res: Response, next: NextFunctio
 
 
     // Creates Rider
-    const createRider = await Rider.create({
+    const createdRider = await Rider.create({
         name: name,
         emailAddress: emailAddress,
         status: "pending",
@@ -83,7 +83,7 @@ export const createRider = async (req: Request, res: Response, next: NextFunctio
     })
     return res.status(201).json({
         "message": "Rider created successfully",
-        "data": createRider
+        "data": createdRider
     })
 }
 

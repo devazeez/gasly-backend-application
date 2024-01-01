@@ -23,7 +23,6 @@ import { GeneratePassword, GenerateSalt, phoneValidaion, emailValidator, passwor
 //         });
 //     }
 
-
 // };
 
 export const findVendor = async (id: string | undefined, businessName: string | undefined, emailAddress: string | undefined, phoneNumber?: string | undefined) => {

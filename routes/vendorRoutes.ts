@@ -1,18 +1,15 @@
 import express, { Request, Response, NextFunction } from "express";
-import { vendorLogin, getVendorProfile, updateVendorProfile } from "../controllers/vendorControllers/vendor";
+import { vendorLogin, getVendorProfile, updateVendorProfile, vendorSignUp } from "../controllers/vendorControllers/vendor";
 import { authenticate } from "../middlewares";
 
 
 const router = express.Router()
 
-router.post('/signup', (req: Request, res: Response, next: NextFunction) => {
-
-    res.json({ "message": "Hello from Azeez vendor" })
-
-})
 
 
 
+
+router.post('/signup', vendorSignUp)
 router.post('/login', vendorLogin)
 
 router.use (authenticate)
