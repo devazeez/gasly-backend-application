@@ -22,7 +22,7 @@ export interface vendorLoginInput {
     password: string;
 };
 
-export interface updateProfileInput {
+export interface updateVendorProfileInput {
     name: string;
     phoneNumber: string;
     businessName: string;

@@ -79,7 +79,6 @@ export const createRider = async (req: Request, res: Response, next: NextFunctio
         address: address,
         password: hashedPassword,
         salt: salt,
-        serviceAvaliable: false,
         imageUrl: imageUrl,
     })
     return res.status(201).json({

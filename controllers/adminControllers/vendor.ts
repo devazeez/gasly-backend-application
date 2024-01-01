@@ -26,7 +26,6 @@ import { GeneratePassword, GenerateSalt, phoneValidaion, emailValidator, passwor
 
 // };
 
-
 export const findVendor = async (id: string | undefined, businessName: string | undefined, emailAddress: string | undefined, phoneNumber?: string | undefined) => {
     if (phoneNumber) {
         return await Vendor.findOne({ phoneNumber: phoneNumber })
@@ -41,10 +40,11 @@ export const findVendor = async (id: string | undefined, businessName: string | 
 }
 
 
+
+
 export const createVendor = async (req: Request, res: Response, next: NextFunction) => {
 
     const { name, emailAddress, phoneNumber, state, lga, address, businessName, password } = <createVendorinput>req.body;
-
 
     const existingVendorEmail = await findVendor('', '', emailAddress, '')
     const existingVendorPhone = await findVendor('', '', '', phoneNumber)
@@ -85,14 +85,11 @@ export const createVendor = async (req: Request, res: Response, next: NextFuncti
         validatedPassword = isPasswordComplex.value;
     }
 
-    // Rest of the code...
-
 
     // Generates salt
     const salt = await GenerateSalt()
     // Hashes password
     const hashedPassword = await GeneratePassword(validatedPassword, salt)
-
 
     // Creates Vendor
     const createVendor = await Vendor.create({
@@ -117,6 +114,8 @@ export const createVendor = async (req: Request, res: Response, next: NextFuncti
 }
 
 
+
+
 export const getVendor = async (req: Request, res: Response, next: NextFunction) => {
 
     const vendors = await Vendor.find().sort({ createdAt: -1 })
@@ -132,6 +131,9 @@ export const getVendor = async (req: Request, res: Response, next: NextFunction)
         })
     }
 }
+
+
+
 
 
 export const getVendorById = async (req: Request, res: Response, next: NextFunction) => {
@@ -150,6 +152,9 @@ export const getVendorById = async (req: Request, res: Response, next: NextFunct
         })
     }
 }
+
+
+
 
 
 export const updateVendorById = async (req: Request, res: Response, next: NextFunction) => {
@@ -212,6 +217,7 @@ export const updateVendorById = async (req: Request, res: Response, next: NextFu
         })
     }
 }
+
 
 
 
