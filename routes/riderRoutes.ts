@@ -1,18 +1,17 @@
 import express, { Request, Response, NextFunction } from "express";
-import { createRider, getRider, getRiderById, updateRiderById, deleteRiderById} from "../controllers";
+import { getRiderProfile, updateRiderProfile, riderLogin} from "../controllers";
+import { authenticate } from "../middlewares";
 
 const router = express.Router();
 
 
-router.post('/Riders', createRider);
+router.post('/login', riderLogin);
 
-router.get('/Riders', getRider);
 
-router.get('/Riders/:id', getRiderById);
+router.use(authenticate)
+router.get('/profile', getRiderProfile);
+router.patch('/profile', updateRiderProfile);
 
-router.patch('/Riders', updateRiderById);
-
-router.delete('/Riders/:id', deleteRiderById);
 
 
 
@@ -22,4 +21,4 @@ router.delete('/Riders/:id', deleteRiderById);
 //     res.json({"message": "Hello from Azeez Admin"});
 // })
 
-export {router as AdminRoute};
+export {router as RiderRoute};

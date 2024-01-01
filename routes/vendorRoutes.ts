@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
-import { vendorLogin, getProfile, updateProfile } from "../controllers/vendorControllers/vendor";
+import { vendorLogin, getVendorProfile, updateVendorProfile } from "../controllers/vendorControllers/vendor";
 import { authenticate } from "../middlewares";
 
 
@@ -16,8 +16,8 @@ router.post('/signup', (req: Request, res: Response, next: NextFunction) => {
 router.post('/login', vendorLogin)
 
 router.use (authenticate)
-router.get('/profile', getProfile)
-router.patch('/profile',updateProfile)
+router.get('/profile', getVendorProfile)
+router.patch('/profile',updateVendorProfile)
 router.patch('/service')
 
 

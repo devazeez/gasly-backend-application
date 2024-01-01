@@ -10,7 +10,6 @@ interface riderDoc extends Document {
     address: string;
     password: string;
     salt: string;
-    serviceAvaliable: boolean;
     imageUrl: string;
     // rating: number;
 }
@@ -25,7 +24,6 @@ const RiderShema = new Schema({
     address: { type: String, required: true },
     password: { type: String, required: true },
     salt: { type: String, required: true },
-    serviceAvaliable: { type: Boolean, required: true },
     imageUrl: { type: String, required: true },
     // rating: {type: Number, required: true},
 }, {

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { createVendorinput, updateVendorinput, vendorLoginInput, updateProfileInput } from "../../dto";
+import { createVendorinput, updateVendorinput, vendorLoginInput, updateVendorProfileInput } from "../../dto";
 import { Vendor } from "../../models";
 import { findVendor } from "../adminControllers/vendor";
 import { generateToken, validatePassword, phoneValidaion } from '../../utility'
@@ -12,16 +12,17 @@ export const vendorLogin = async (req: Request, res: Response, next: NextFunctio
 
     if (existingVendor !== null) {
         const validateVendorPassword = await validatePassword(password, existingVendor.salt, existingVendor.password)
+        
         if (validateVendorPassword) {
 
-            const token = generateToken({
+            const accessToken = generateToken({
                 _id: existingVendor.id,
                 emailAddress: existingVendor.emailAddress,
                 password: existingVendor.password,
             })
             return res.status(200).json({
                 "message": "Vendor logged in successfully",
-                "token": token,
+                "token": accessToken,
                 "data": existingVendor
             })
         } else {
@@ -37,7 +38,7 @@ export const vendorLogin = async (req: Request, res: Response, next: NextFunctio
 }
 
 
-export const getProfile = async (req: Request, res: Response, next: NextFunction) => {
+export const getVendorProfile = async (req: Request, res: Response, next: NextFunction) => {
 
     const user = req.user
 
@@ -62,7 +63,7 @@ export const getProfile = async (req: Request, res: Response, next: NextFunction
 
 }
 
-export const updateProfile = async (req: Request, res: Response, next: NextFunction) => {
+export const updateVendorProfile = async (req: Request, res: Response, next: NextFunction) => {
 
     const user = req.user
 
@@ -70,7 +71,7 @@ export const updateProfile = async (req: Request, res: Response, next: NextFunct
 
         const existingVendor = await findVendor('', '', user.emailAddress, '');
 
-        const { name, phoneNumber, businessName } = <updateProfileInput>req.body;
+        const { name, phoneNumber, businessName } = <updateVendorProfileInput>req.body;
         const validatedNigerianNumber = phoneValidaion(phoneNumber)
 
         if (validatedNigerianNumber !== true) {

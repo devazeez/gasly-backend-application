@@ -7,7 +7,10 @@ import { MONGO_URI } from "./config";
 
 import { connectDb } from "./config/dbConnections"
 import { StateRoute } from "./routes/statesAndLgaRoutes";
+import { RiderRoute } from "./routes/riderRoutes";
 const dotenv = require("dotenv").config();
+
+
 
 connectDb();
 const app = express();
@@ -19,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api/admin', AdminRoute);
 app.use('/api/vendors', VendorRoute);
+app.use('/api/riders', RiderRoute);
 app.use('/api/', StateRoute);
 
 

@@ -1,4 +1,5 @@
- import { vendorPayload } from "../dto/vendor.dto";
+import { vendorPayload } from "../dto/vendor.dto";
+import { riderPayload } from "./rider.dto";
 
 
- export type authPayLoad = vendorPayload; 
+export type authPayLoad = vendorPayload | riderPayload; 
