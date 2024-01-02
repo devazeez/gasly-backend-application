@@ -1,10 +1,11 @@
 import express, { Request, Response, NextFunction } from "express";
-import { getRiderProfile, updateRiderProfile, riderLogin} from "../controllers";
+import { getRiderProfile, updateRiderProfile, riderLogin, riderSignUp} from "../controllers";
 import { authenticate } from "../middlewares";
 
 const router = express.Router();
 
 
+router.post('/signup', riderSignUp);
 router.post('/login', riderLogin);
 
 
@@ -14,11 +15,5 @@ router.patch('/profile', updateRiderProfile);
 
 
 
-
-
-// router.get('/api/Riders/:id', (req: Request, res: Response, next: NextFunction) =>{
-
-//     res.json({"message": "Hello from Azeez Admin"});
-// })
 
 export {router as RiderRoute};
