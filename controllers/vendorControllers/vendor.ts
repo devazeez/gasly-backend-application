@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { createVendorinput, updateVendorinput, vendorLoginInput, updateVendorProfileInput } from "../../dto";
 import { Vendor } from "../../models";
 import { findVendor } from "../adminControllers/vendor";
-import { generateToken, validatePassword, phoneValidaion, passwordComplexity, GenerateSalt, GeneratePassword} from '../../utility'
+import { generateToken, validatePassword, phoneValidaion, passwordComplexity, GenerateSalt, GeneratePassword } from '../../utility'
 
 
 

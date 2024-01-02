@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { riderLoginInput, updateRiderProfileInput, createRiderinput } from "../../dto";
 import { Rider } from "../../models";
 import { genSalt } from "bcrypt";
-import { generateToken, validatePassword, phoneValidaion, passwordComplexity, GenerateSalt, GeneratePassword, emailValidator} from '../../utility'
+import { generateToken, validatePassword, phoneValidaion, passwordComplexity, GenerateSalt, GeneratePassword, emailValidator } from '../../utility'
 
 
 
@@ -28,10 +28,6 @@ export const riderSignUp = async (req: Request, res: Response, next: NextFunctio
     const validatedNigerianNumber = phoneValidaion(phoneNumber)
     const isValidEmail = emailValidator(emailAddress)
 
-    const existingRiderEmail = await Rider.findOne({ emailAddress: emailAddress })
-    const existingRiderName = await Rider.findOne({ name: name })
-    const existingRiderPhone = await Rider.findOne({ phoneNumber: phoneNumber })
-
     if (validatedNigerianNumber !== true) {
         res.status(400).json({
             "message": "The number " + "'" + phoneNumber + "'" + "is not a valid Nigerian number"
@@ -41,6 +37,10 @@ export const riderSignUp = async (req: Request, res: Response, next: NextFunctio
             "message": "The email " + "'" + emailAddress + "'" + "is not a valid email address"
         })
     }
+
+    const existingRiderEmail = await Rider.findOne({ emailAddress: emailAddress })
+    const existingRiderName = await Rider.findOne({ name: name })
+    const existingRiderPhone = await Rider.findOne({ phoneNumber: phoneNumber })
 
     if (existingRiderEmail !== null) {
         res.status(400).json({
@@ -64,7 +64,7 @@ export const riderSignUp = async (req: Request, res: Response, next: NextFunctio
 
     const isPasswordComplex = passwordComplexity(password);
     let validatedPassword = '';
-    
+
     if (isPasswordComplex.error) {
         return res.status(400).json({
             message: "Invalid password complexity",
@@ -150,11 +150,11 @@ export const getRiderProfile = async (req: Request, res: Response, next: NextFun
 
         const existingRider = await findRider('', user.emailAddress, '');
 
-        if (existingRider == null){
+        if (existingRider == null) {
             return res.status(404).json({
                 "message": "Rider does not exists"
             })
-        }else{
+        } else {
             return res.status(200).json({
                 "message": "Profile fetched successfully",
                 "data": existingRider
