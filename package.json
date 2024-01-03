@@ -2,11 +2,11 @@
   "name": "gasly-backend-application",
   "version": "1.0.0",
   "description": "backend application for gasly",
-  "main": "index.mjs",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.mjs",
-    "dev": "nodemon index.mjs"
+    "start": "node index.ts",
+    "dev": "nodemon index.ts"
 
   },
   "author": "azeez",
