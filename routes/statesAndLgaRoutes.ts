@@ -1,11 +1,9 @@
 import express, { Request, Response, NextFunction } from "express";
-import { getStates } from '../controllers'
-
+import { getStates } from "../controllers";
 
 const router = express.Router();
 
-
-router.get('/states', getStates);
+router.get("/states", getStates);
 
 ///states/lagos/surulere
 
