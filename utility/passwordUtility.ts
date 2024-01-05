@@ -15,6 +15,11 @@ export function passwordComplexity(password: string) {
 }
 
 
+
+
+
+
+
 export const GenerateSalt = async () => {
     return await bcrypt.genSalt();
 }
@@ -26,6 +31,12 @@ export const GeneratePassword = async (password: string, salt: string) => {
 export const validatePassword = async (enteredPassword: string, salt: string, savedPassword: string) => {
     return await GeneratePassword(enteredPassword, salt) === savedPassword
 }
+
+
+
+
+
+
 
 export const generateToken = (payload: authPayLoad) => {
 
