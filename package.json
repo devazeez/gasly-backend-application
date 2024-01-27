@@ -5,10 +5,10 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "ts-node-dev --loader ts-node/esm --transpile-only index.ts",
+        "compiled": "ts-node-dev --loader ts-node/esm --transpile-only index.ts",
         "dev": "nodemon index.ts",
         "commit": "node scripts/git-commit.js",
-        "compiled": "node dist/index.js"
+        "start": "node dist/index.js"
     },
     "author": "azeez",
     "license": "ISC",
