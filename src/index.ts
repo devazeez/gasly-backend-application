@@ -60,7 +60,7 @@ app.use('/api/', StateRoute);
 // })
 
 connectDB().then(() => {
-    app.listen(process.env.PORT, () => {
+    app.listen(process.env.PORT || 3000, () => {
         console.log(`listening for requests at port ${process.env.PORT}`);
     })
 })
