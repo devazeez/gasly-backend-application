@@ -4,9 +4,12 @@
     "description": "backend application for gasly",
     "main": "index.js",
     "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "compiled": "ts-node-dev --loader ts-node/esm --transpile-only index.ts",
+        "commit": "node scripts/git-commit.js",
+        "start": "node dist/index.js",
         "dev": "env-cmd nodemon index.js",
-        "repl": "env-cmd node",
-        "commit": "node scripts/git-commit.js"
+        "repl": "env-cmd node"
     },
     "author": "azeez",
     "license": "ISC",
