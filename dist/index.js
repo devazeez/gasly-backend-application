@@ -43,8 +43,6 @@ app.use('/api/', routes_1.StateRoute);
 //     console.log(`App is listening to port ${process.env.PORT}`);
 // })
 connectDB().then(() => {
-    app.listen(process.env.PORT || 3000, () => {
-        console.log(`listening for requests at port ${process.env.PORT}`);
-    });
+    app.listen(process.env.PORT || 3000)
 });
 //# sourceMappingURL=index.js.map
