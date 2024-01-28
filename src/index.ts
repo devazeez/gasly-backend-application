@@ -43,7 +43,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-
 app.use('/api/admin', AdminRoute);
 app.use('/api/customer', CustomerRoute);
 app.use('/api/vendors', VendorRoute);
