@@ -4,11 +4,9 @@
     "description": "backend application for gasly",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "compiled": "ts-node-dev --loader ts-node/esm --transpile-only index.ts",
-        "dev": "nodemon index.ts",
-        "commit": "node scripts/git-commit.js",
-        "start": "node dist/index.js"
+        "dev": "env-cmd nodemon index.js",
+        "repl": "env-cmd node",
+        "commit": "node scripts/git-commit.js"
     },
     "author": "azeez",
     "license": "ISC",
@@ -29,6 +27,7 @@
         "body-parser": "^1.20.2",
         "cors": "^2.8.5",
         "dotenv": "^16.3.1",
+        "env-cmd": "^10.1.0",
         "express": "^4.18.2",
         "joi-password-complexity": "^5.2.0",
         "jsonwebtoken": "^9.0.2",
