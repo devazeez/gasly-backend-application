@@ -10,5 +10,11 @@
         {
             "src": "/(.*)"
         }
+    ],
+    "rewrites": [
+        {
+            "source": "/api/(.*)",
+            "destination": "/routes"
+        }
     ]
 }
