@@ -3,10 +3,13 @@
     "version": "1.0.0",
     "description": "backend application for gasly",
     "main": "index.js",
+    "engines": {
+        "node": "18.x"
+    },
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "ts-node-dev --loader ts-node/esm --transpile-only index.ts",
-      "dev": "nodemon --exec ts-node-dev --loader ts-node/esm --transpile-only index.ts"
+      "start": "node index.ts",
+      "dev": "nodemon index.ts"
     },
   "author": "azeez",
   "license": "ISC",
